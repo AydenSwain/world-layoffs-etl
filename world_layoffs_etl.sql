@@ -76,3 +76,10 @@ WHERE country = 'United States.';
 SELECT *
 FROM layoffs_stg
 WHERE country LIKE 'United States%';
+
+-- Change date from str to date datatype
+UPDATE layoffs_stg
+SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
+
+SELECT *
+FROM layoffs_stg;
