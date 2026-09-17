@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS
-	layoffs_staging;
+	layoffs_stg;
 
-CREATE TABLE layoffs_staging
+CREATE TABLE layoffs_stg
 LIKE layoffs;
 
-INSERT layoffs_staging
+INSERT layoffs_stg
 WITH remove_duplicates AS (
 	SELECT *,
 	ROW_NUMBER() OVER ( 
@@ -17,4 +17,4 @@ FROM remove_duplicates
 WHERE row_num = 1;
 
 SELECT *
-FROM layoffs_staging;
+FROM layoffs_stg;
