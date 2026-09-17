@@ -84,5 +84,21 @@ SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
 ALTER TABLE layoffs_stg
 MODIFY COLUMN `date` DATE;
 
-SELECT *
+-- Test date datetype fix
+SELECT `date`
 FROM layoffs_stg;
+
+-- ########### Address null data ###########
+-- >>> Context: This data set will be used to determine how industry affects total layoffs.
+-- >>> Strategy: Knowing this, I'm going to ensure there are no null or empty values in the industry column.
+-- >>> Decision: Rather than replacing nulls with total or industry averages, the null values will be removed.
+-- >>>           Since we have 2356 rows, 739 of which have missing total layoffs, we won't lose too much of the sample size for a regression analysis.
+
+-- Find counts for the previous reasoning
+SELECT COUNT(*)
+FROM layoffs_stg;
+
+SELECT COUNT(*)
+FROM layoffs_stg
+WHERE total_laid_off IS NULL OR total_laid_off = '';
+
