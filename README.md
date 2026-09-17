@@ -1,2 +1,3 @@
-# world-layoffs-etl
-Extract, transform, and load SQL pipeline performed on a world layoffs dataset.
+# World Layoffs ETL Pipeline
+>### Follow this link to view the full SQL code for this project:
+>[SQL Code Link](world_layoffs_etl.sql)
