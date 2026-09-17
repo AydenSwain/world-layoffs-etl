@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS
+	layoffs_staging,
+	layoffs_staging2;
+
 CREATE TABLE layoffs_staging
 LIKE layoffs;
 
