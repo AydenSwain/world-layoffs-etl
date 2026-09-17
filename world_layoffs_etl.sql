@@ -102,3 +102,34 @@ SELECT COUNT(*)
 FROM layoffs_stg
 WHERE total_laid_off IS NULL OR total_laid_off = '';
 
+-- Investigate industry nulls
+SELECT *
+FROM layoffs_stg
+WHERE industry IS NULL OR industry = '';
+-- There are four companies
+
+-- Convert empty industry to null
+UPDATE layoffs_stg
+SET industry = NULL
+WHERE industry = '';
+
+-- Investigate if these same companies contain other entries with a valid industry
+SELECT stg1.company, stg1.industry, stg2.company, stg2.industry
+FROM layoffs_stg AS stg1
+JOIN layoffs_stg AS stg2
+	ON stg1.company = stg2.company
+WHERE stg1.industry IS NULL AND stg2.industry IS NOT NULL;
+-- There are 4 cases where the industry can be coppied over
+
+-- Update the nulls
+UPDATE layoffs_stg AS stg1
+JOIN layoffs_stg AS stg2
+	ON stg1.company = stg2.company
+SET stg1.industry = stg2.industry
+WHERE stg1.industry IS NULL AND stg2.industry IS NOT NULL;
+
+-- Investigate industry nulls again
+SELECT *
+FROM layoffs_stg
+WHERE industry IS NULL OR industry = '';
+-- There is one company left
