@@ -38,5 +38,21 @@ SET
     stage = TRIM(stage),
     country = TRIM(country);
 
-SELECT *
-FROM layoffs_stg;
+-- Investigate qualitative cols
+SELECT DISTINCT location
+FROM layoffs_stg
+ORDER BY 1;
+
+SELECT DISTINCT industry
+FROM layoffs_stg
+ORDER BY 1;
+-- Problem with Crypto
+
+SELECT DISTINCT stage
+FROM layoffs_stg
+ORDER BY 1;
+
+SELECT DISTINCT country
+FROM layoffs_stg
+ORDER BY 1;
+-- Problem with United States
