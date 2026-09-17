@@ -24,3 +24,19 @@ SELECT
     (SELECT COUNT(*) FROM layoffs_stg) AS cleaned_count,
     (SELECT COUNT(*) FROM layoffs_raw) - (SELECT COUNT(*) FROM layoffs_stg) AS duplicates_removed;
 -- Results: 5 duplicates removed
+
+-- ########### Standardize the data ###########
+-- Trim text cols
+DESCRIBE layoffs_stg;
+
+UPDATE layoffs_stg
+SET 
+	company = TRIM(company),
+    location = TRIM(location),
+    industry = TRIM(industry),
+    percentage_laid_off = TRIM(percentage_laid_off),
+    stage = TRIM(stage),
+    country = TRIM(country);
+
+SELECT *
+FROM layoffs_stg;
