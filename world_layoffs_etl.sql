@@ -46,7 +46,7 @@ ORDER BY 1;
 SELECT DISTINCT industry
 FROM layoffs_stg
 ORDER BY 1;
--- Problem with Crypto
+-- Discrepancy with Crypto
 
 SELECT DISTINCT stage
 FROM layoffs_stg
@@ -55,4 +55,15 @@ ORDER BY 1;
 SELECT DISTINCT country
 FROM layoffs_stg
 ORDER BY 1;
--- Problem with United States
+-- Discrepancy with United States
+
+-- Fix crypto discrepancy
+UPDATE layoffs_stg
+SET industry = 'Crypto'
+WHERE industry = 'CryptoCurrency' OR industry = 'Crypto Currency';
+
+-- Test crypto fix
+SELECT *
+FROM layoffs_stg
+WHERE industry LIKE 'Crypto%';
+
