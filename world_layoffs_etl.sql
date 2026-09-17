@@ -81,5 +81,8 @@ WHERE country LIKE 'United States%';
 UPDATE layoffs_stg
 SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
 
+ALTER TABLE layoffs_stg
+MODIFY COLUMN `date` DATE;
+
 SELECT *
 FROM layoffs_stg;
