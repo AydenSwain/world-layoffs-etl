@@ -57,13 +57,22 @@ FROM layoffs_stg
 ORDER BY 1;
 -- Discrepancy with United States
 
--- Fix crypto discrepancy
+-- Fix Crypto discrepancy
 UPDATE layoffs_stg
 SET industry = 'Crypto'
 WHERE industry = 'CryptoCurrency' OR industry = 'Crypto Currency';
 
--- Test crypto fix
+-- Test Crypto fix
 SELECT *
 FROM layoffs_stg
 WHERE industry LIKE 'Crypto%';
 
+-- Fix United States discrepancy
+UPDATE layoffs_stg
+SET country = 'United States'
+WHERE country = 'United States.';
+
+-- Test United States fix
+SELECT *
+FROM layoffs_stg
+WHERE country LIKE 'United States%';
