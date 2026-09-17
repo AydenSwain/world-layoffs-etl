@@ -133,3 +133,27 @@ SELECT *
 FROM layoffs_stg
 WHERE industry IS NULL OR industry = '';
 -- There is one company left
+
+-- Drop the remaining company
+DELETE FROM layoffs_stg
+WHERE company = 'Bally''s Interactive';
+
+-- Double check industry nulls
+SELECT *
+FROM layoffs_stg
+WHERE industry IS NULL OR industry = '';
+-- None left
+
+-- Select before deleting the null total layed off
+SELECT *
+FROM layoffs_stg
+WHERE total_laid_off IS NULL OR total_laid_off = '';
+-- Apears correct
+
+-- Drop the rows with missing total laied off data
+DELETE FROM layoffs_stg
+WHERE total_laid_off IS NULL OR total_laid_off = '';
+
+-- Use UI to export this table as a csv in the data directory
+SELECT *
+FROM layoffs_stg;
